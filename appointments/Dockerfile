@@ -2,7 +2,7 @@
 FROM python:3.9-slim
 
 # Set the working directory in the container
-WORKDIR /app/appointments
+WORKDIR /app
 
 # Install Flask and pymongo
 RUN pip install --no-cache-dir Flask 

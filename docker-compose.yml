@@ -1,0 +1,40 @@
+version: "3"
+services:
+  appointments-service:
+    image: farquleet/appointments-service
+    # build:
+    #   context: ./appointments
+    #   dockerfile: Dockerfile
+    ports:
+      - 7070:7070
+    # depends_on:
+    #   - mongo
+
+  doctors-service:
+    image: farquleet/doctors-service
+    # build:
+    #   context: ./doctors
+    #   dockerfile: Dockerfile
+    ports:
+      - 9090:9090
+    # depends_on:
+    #   - mongo
+
+  frontend:
+    image: farquleet/frontend-service
+    # build:
+    #   context: ./frontend
+    #   dockerfile: Dockerfile
+    ports:
+      - 3000:3000
+    depends_on:
+      - appointments-service
+      - doctors-service
+    environment:
+      - APPOINTMENTS_SERVICE_URL=172.20.0.3:7070
+      - DOCTORS_SERVICE_URL=172.20.0.2:9090
+
+  # mongo:
+  #   image: mongo
+  #   ports:
+  #     - 27017:27017
