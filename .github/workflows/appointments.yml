@@ -23,6 +23,6 @@ jobs:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
         run: |
-          docker build -t your-username/appointments-service:${{ github.sha }} ./appointments-service
+          docker build -t farquleet/appointments-service:${{ github.sha }} ./appointments
           docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
-          docker push your-username/appointments-service:${{ github.sha }}
+          docker push farquleet/appointments-service:${{ github.sha }}
