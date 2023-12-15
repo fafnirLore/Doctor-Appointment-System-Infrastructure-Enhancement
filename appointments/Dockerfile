@@ -5,7 +5,7 @@ FROM python:3.9-slim
 WORKDIR /app/appointments
 
 # Install Flask and pymongo
-RUN pip install --no-cache-dir Flask pymongo
+RUN pip install --no-cache-dir Flask 
 
 # Copy the Flask application code to the working directory
 COPY . .
@@ -14,7 +14,7 @@ COPY . .
 EXPOSE 7070
 
 # Set the environment variable for the MongoDB URL
-ENV APPOINTMENTS_DB_URL="localhost:27017"
+# ENV APPOINTMENTS_DB_URL="localhost:27017"
 
 # Run the Flask application
 CMD ["python", "app.py"]
