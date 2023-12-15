@@ -17,13 +17,13 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Build and push Docker image
         env:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
         run: |
-          docker build -t farquleet/doctors-service:${{ github.sha }} ./doctors
+          docker build -t farquleet/frontend-service:${{ github.sha }} ./frontend
           docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
-          docker push farquleet/doctors-service:${{ github.sha }}
+          docker push farquleet/frontend-service:${{ github.sha }}
