@@ -1,0 +1,29 @@
+name: Doctors Service CI/CD PipeLine
+
+on:
+  pull_request:
+    paths:
+      - 'doctors/**'
+  push:
+    branches:
+      - main
+    paths:
+      - 'doctors/**'
+
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Build and push Docker image
+        env:
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+        run: |
+          docker build -t your-username/doctors-service:${{ github.sha }} ./doctors-service
+          docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+          docker push your-username/doctors-service:${{ github.sha }}
